@@ -1,12 +1,22 @@
-const shuffeledCard = document.querySelector(".shuffeledCard");
-const cardPack = ["K", "Q", "J", 9, 8, 7, 6, 5, 4, 3, 2, "A"];
+function clock() {
+  const date = new Date(); //* date object
 
-function shuffle(cards) {
-  for (let i = cards.length - 1; i > 0; i--) {
-    let random = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[random]] = [cards[random], cards[i]];
-  }
-  return (shuffeledCard.textContent = cards);
+  let hours = date.getHours(); //Getting hours
+  hours = hours % 12; //* formatting the hours
+  hours = hours < 10 ? "0" + hours : hours;
+
+  let md = hours > 12 ? "PM" : "AM";
+
+  let minutes = date.getMinutes(); //* getting and formatting minutes
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  let seconds = date.getSeconds(); //* getting and formatting seconds
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  let time = `${hours}:${minutes}:${seconds} ${md}`; //* Final time string
+  document.querySelector(".clock").textContent = time;
 }
 
-console.log(shuffle(cardPack));
+clock();
+setInterval(clock, 1000);
+console.log(clock);
